@@ -35,4 +35,26 @@ router.post('/',checkAdmin, async (req, res) => {
     }
 });
 
+// DELETE vote and related user_votes
+router.delete('/:vote_id', async (req, res) => {
+    const { vote_id } = req.params;
+
+    try {
+        // First, check if vote exists
+        const check = await pool.query('SELECT * FROM vote WHERE id = $1', [vote_id]);
+
+        if (check.rows.length === 0) {
+            return res.status(404).json({ message: 'Vote not found' });
+        }
+
+        // Delete vote (user_votes will be auto-deleted due to ON DELETE CASCADE)
+        await pool.query('DELETE FROM vote WHERE id = $1', [vote_id]);
+
+        res.status(200).json({ message: 'Vote and associated user votes deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting vote:', err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 module.exports = router;

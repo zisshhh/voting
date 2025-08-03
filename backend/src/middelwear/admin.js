@@ -3,8 +3,8 @@ const pool = require('../connections/DB.connect.js')
 
 const checkAdmin = async (req, res, next) => {
     try {
-        // const token = req.cookies.login_token;
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIyNDA5NjJiLTQzY2EtNGMyMC04NjMyLTc5NGUzMjk1NTkxNCIsIm5hbWUiOiJkaHJ1diIsImlhdCI6MTc1NDIxNTc1MH0._qZRKsvGg9MUpRtsRY8cApQcoh7l3E9iWhW-4hkVzx0';
+        const token = req.cookies.login_token;
+        // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImY2YjU3YzRlLTU1MGItNDE1NS04ZTgwLTJjM2Y0MDAwZWIwOCIsIm5hbWUiOiJhZG1pbiIsImlhdCI6MTc1NDIzMTUxMX0.v_n9EWq0aT5nfTk-xyc7IowzVoQmqxSbzTPDj0wOvlY';
 
         if (!token) {
             return res.status(401).json({ message: 'Access denied. No login token provided.' });
