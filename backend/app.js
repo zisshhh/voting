@@ -21,5 +21,7 @@ app.get('/', (req, res) => {
 
 app.use('/signup', require('./src/routes/user/signup.js'));
 app.use('/login', require('./src/routes/user/login.js'));
+app.use('/add', require('./src/routes/add/vote.js'));
+
 
 module.exports = app
