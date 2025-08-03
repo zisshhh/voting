@@ -4,7 +4,7 @@ const moment = require('moment');
 const pool = require("../../connections/DB.connect.js");
 const checkAdmin = require("../../middelwear/admin.js")
 
-router.post('/',checkAdmin, async (req, res) => {
+router.post('/', checkAdmin, async (req, res) => {
     try {
         const { name, description, start_date, end_date } = req.body;
 
@@ -36,7 +36,7 @@ router.post('/',checkAdmin, async (req, res) => {
 });
 
 // DELETE vote and related user_votes
-router.delete('/:vote_id', async (req, res) => {
+router.delete('/:vote_id', checkAdmin, async (req, res) => {
     const { vote_id } = req.params;
 
     try {

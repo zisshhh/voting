@@ -30,7 +30,7 @@ router.get('/overview', checkAdmin, async (req, res) => {
 });
 
 // Route 2: GET /dashboard/elections
-router.get('/elections', async (req, res) => {
+router.get('/elections', checkAdmin, async (req, res) => {
     try {
         const query = `
       SELECT
