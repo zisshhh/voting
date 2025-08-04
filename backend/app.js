@@ -28,5 +28,6 @@ app.use('/votes/ongoing', require('./src/routes/votes/ongoing.js'))
 app.use('/votes/result', require('./src/routes/votes/result.js'))
 app.use('/admin', require('./src/routes/deshboard/admin.js'))
 app.use('/stats', require('./src/routes/deshboard/stats.js'))
+app.use('/graph',require('./src/routes/deshboard/graph.js'))
 
 module.exports = app
