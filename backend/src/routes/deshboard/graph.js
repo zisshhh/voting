@@ -5,18 +5,18 @@ const pool = require("../../connections/DB.connect.js");
 const checkAdmin = require('../../middelwear/admin.js'); // Reuse your auth if needed
 
 // GET /dashboard/graph
-router.get('/', checkAdmin, async (req, res) => {
+router.get('/',checkAdmin, async (req, res) => {
   try {
     const result = await pool.query(`
-    SELECT
-    v.id AS vote_id,
-    v.name AS vote_name,
-    COUNT(uv.id) AS total_voters
-    FROM vote v
-    LEFT JOIN user_votes uv ON v.id = uv.vote_id
-    WHERE NOW() BETWEEN v.start_date AND v.end_date
-    GROUP BY v.id, v.name;
+       SELECT 
+        v.name AS election_name,
+        COUNT(uv.id) AS voters
+      FROM vote v
+      LEFT JOIN user_votes uv ON v.id = uv.vote_id
+      GROUP BY v.name
+      ORDER BY v.name
     `);
+    
 
     res.json(result.rows);
   } catch (err) {
